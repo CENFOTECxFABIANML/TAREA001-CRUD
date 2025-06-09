@@ -1,0 +1,329 @@
+type: collection.insomnia.rest/5.0
+name: TAREA001-FabianML
+meta:
+  id: wrk_bc0349ef43734ef2b04d142eb2f71ef0
+  created: 1749255287724
+  modified: 1749255546421
+  description: ""
+collection:
+  - url: "{{ _.base_url }}products"
+    name: Create Product
+    meta:
+      id: req_452ef714a20e436f85c7250bc76a2d99
+      created: 1749255450817
+      modified: 1749259961556
+      isPrivate: false
+      description: ""
+      sortKey: -1749255450817
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Samsung Television",
+        	"description": "100 inches - 4k",
+        	"price": 1230000.99,
+        	"stock": 4,
+        	"category": {
+        		"id": 1 
+        	}
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.1.0
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_39c035bd78cc41b1b131934a9ce2f913',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}auth/login"
+    name: Login SuperAdmin
+    meta:
+      id: req_39c035bd78cc41b1b131934a9ce2f913
+      created: 1749258065168
+      modified: 1749486844421
+      isPrivate: false
+      description: ""
+      sortKey: -1749258065168
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "super.admin@gmail.com", 
+        	"password": "superadmin123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/9.1.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}categories"
+    name: Create Category
+    meta:
+      id: req_c190680fed474b088e76143a661d4932
+      created: 1749259399509
+      modified: 1749486179150
+      isPrivate: false
+      description: ""
+      sortKey: -1747150667584.4766
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Electronics 3",
+        	"description": "All technology related 3"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.1.0
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_39c035bd78cc41b1b131934a9ce2f913',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}categories/2"
+    name: Update Category
+    meta:
+      id: req_35c1331087e74fcd94212fe5de9b06ae
+      created: 1749482166436
+      modified: 1749485887416
+      isPrivate: false
+      description: ""
+      sortKey: -1747031528910.9375
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Library",
+        	"description": "All paper related things"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.1.0
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_39c035bd78cc41b1b131934a9ce2f913',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}categories"
+    name: Get Categories
+    meta:
+      id: req_683dcc1e0c3e4f38a3f929ba243b290d
+      created: 1749482355082
+      modified: 1749482369063
+      isPrivate: false
+      description: ""
+      sortKey: -1746078419522.625
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.1.0
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_39c035bd78cc41b1b131934a9ce2f913',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}products/1"
+    name: Update Product
+    meta:
+      id: req_ec65dee3bd414bbcac99b1606eeae9a7
+      created: 1749482403505
+      modified: 1749486730290
+      isPrivate: false
+      description: ""
+      sortKey: -1747984638299.25
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Xiaomi Television",
+        	"description": "120 inches - 4k",
+        	"price": 430000.99,
+        	"stock": 1,
+        	"category": {
+        		"id": 1 
+        	}
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.1.0
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_39c035bd78cc41b1b131934a9ce2f913',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}products"
+    name: Get Products
+    meta:
+      id: req_ad609afea4ab4677ab04382b4c070baa
+      created: 1749482448269
+      modified: 1749483980719
+      isPrivate: false
+      description: ""
+      sortKey: -1747269806258.0156
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.1.0
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_39c035bd78cc41b1b131934a9ce2f913',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}categories/5"
+    name: Delete Category
+    meta:
+      id: req_20cbe36f0e4d4d46a456c89333808c6b
+      created: 1749482543238
+      modified: 1749486410677
+      isPrivate: false
+      description: ""
+      sortKey: -1746554974216.7812
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/11.1.0
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_39c035bd78cc41b1b131934a9ce2f913',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}products/2"
+    name: Delete Product
+    meta:
+      id: req_408c312479924dbdb41d613cedfce25d
+      created: 1749482569941
+      modified: 1749486679589
+      isPrivate: false
+      description: ""
+      sortKey: -1747508083605.0938
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/11.1.0
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_39c035bd78cc41b1b131934a9ce2f913',
+        'b64::JC50b2tlbg==::46b', 'always', 60 %}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}auth/login"
+    name: Login Normal User
+    meta:
+      id: req_7b129d90139e4402973b372074a87ce8
+      created: 1749486852516
+      modified: 1749486925113
+      isPrivate: false
+      description: ""
+      sortKey: -1749256757992.5
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "fabian.miranda@gmail.com", 
+        	"password": "fabianm123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/9.1.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_63ef6e216c76c72372ead138fc38bae9ffe1e0ea
+    created: 1749255287729
+    modified: 1749255287729
+environments:
+  name: Base Environment
+  meta:
+    id: env_63ef6e216c76c72372ead138fc38bae9ffe1e0ea
+    created: 1749255287727
+    modified: 1749255628353
+    isPrivate: false
+  data:
+    base_url: http://localhost:8080/
