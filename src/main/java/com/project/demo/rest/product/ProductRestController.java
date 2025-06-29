@@ -1,10 +1,14 @@
 package com.project.demo.rest.product;
 
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
+import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.product.Product;
 import com.project.demo.logic.entity.product.ProductRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,8 +25,22 @@ public class ProductRestController {
 
     @GetMapping
     @PreAuthorize("isAuthenticated()")
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public ResponseEntity<?> getAllProducts(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size,
+            HttpServletRequest request) {
+
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Product> productsPage = productRepository.findAll(pageable);
+
+        Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
+        meta.setTotalPages(productsPage.getTotalPages());
+        meta.setTotalElements(productsPage.getTotalElements());
+        meta.setPageNumber(productsPage.getNumber() + 1);
+        meta.setPageSize(productsPage.getSize());
+
+        return new GlobalResponseHandler().handleResponse("Products retrieved successfully",
+                productsPage.getContent(), HttpStatus.OK, meta);
     }
 
     @PutMapping("/{id}")
@@ -40,23 +58,6 @@ public class ProductRestController {
         }
     }
 
-//    @PutMapping("/{id}")
-//    @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
-//    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
-//        return productRepository.findById(id)
-//                .map(existingProduct -> {
-//                    existingProduct.setName(product.getName());
-//                    existingProduct.setDescription(product.getDescription());
-//                    existingProduct.setPrice(product.getPrice());
-//                    existingProduct.setStock(product.getStock());
-//                    return productRepository.save(existingProduct);
-//                })
-//                .orElseGet(() -> {
-//                    product.setId(id);
-//                    return productRepository.save(product);
-//                });
-//    }
-
     @PostMapping()
     @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
     public ResponseEntity<?> addProduct(@RequestBody Product product, HttpServletRequest request) {
@@ -64,10 +65,6 @@ public class ProductRestController {
         return new GlobalResponseHandler().handleResponse("Product created successfully",
                 savedProduct, HttpStatus.CREATED, request);
     }
-
-//    @PostMapping
-//    @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
-//    public Product addProduct(@RequestBody Product product) {return productRepository.save(product);}
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
@@ -82,8 +79,4 @@ public class ProductRestController {
                     HttpStatus.NOT_FOUND, request);
         }
     }
-
-//    @DeleteMapping("/{id}")
-//    @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
-//    public void deleteProduct(@PathVariable Long id) { productRepository.deleteById(id);}
 }
